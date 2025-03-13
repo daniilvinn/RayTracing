@@ -8,10 +8,10 @@ namespace RT {
 	{
 		Logging::Init();
 
-		Logging::Info("Info test");
-		Logging::Warning("Warning test");
-		Logging::Error("Error test");
-		Logging::Critical("Critical test");
+		LOG_INFO("Info test");
+		LOG_WARN("Warning test");
+		LOG_ERROR("Error test");
+		LOG_CRITICAL("Critical test");
 	}
 
 	void Application::Run()

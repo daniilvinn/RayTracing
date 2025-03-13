@@ -19,12 +19,15 @@ namespace RT {
 			auto CurrentTime = std::chrono::system_clock::now();
 			std::string LogFileName = fmt::format("Log/Log_{:%Y%m%d%H%M}.txt", CurrentTime);
 
-			auto ConsoleSink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
-			auto FileSink = std::make_shared<spdlog::sinks::basic_file_sink_mt>(LogFileName);
+			std::vector<spdlog::sink_ptr> Sinks;
 
-			spdlog::sinks_init_list SinkList = { ConsoleSink, FileSink };
+			Sinks.push_back(std::make_shared<spdlog::sinks::stdout_color_sink_mt>());
 
-			LoggerHandle = std::make_shared<spdlog::logger>("Log", SinkList);
+			if (!IN_RELEASE_BUILD) {
+				Sinks.push_back(std::make_shared<spdlog::sinks::basic_file_sink_mt>(LogFileName));
+			}
+
+			LoggerHandle = std::make_shared<spdlog::logger>("Log", Sinks.begin(), Sinks.end());
 			LoggerHandle->set_pattern("%^[%T][%l]: %v%$");
 			LoggerHandle->set_level(spdlog::level::level_enum::info);
 		}

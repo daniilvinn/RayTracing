@@ -6,7 +6,7 @@
 
 using namespace RT;
 
-#ifdef RT_RELEASE
+#ifdef TEMP_RT_RELEASE
 INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	PSTR lpCmdLine, INT nCmdShow)
 #else

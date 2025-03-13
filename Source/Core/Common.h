@@ -26,4 +26,10 @@ namespace RT {
 	template<typename T>
 	using Ref = std::shared_ptr<T>;
 
+#ifdef RT_RELEASE
+	#define IN_RELEASE_BUILD (1)
+#else
+	#define IN_RELEASE_BUILD (0)
+#endif
+
 }
