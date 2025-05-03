@@ -17,7 +17,7 @@ namespace RT {
 	public:
 		static void Init() {
 			auto CurrentTime = std::chrono::system_clock::now();
-			std::string LogFileName = fmt::format("Log/Log_{:%Y%m%d%H%M}.txt", CurrentTime);
+			LogFileName = fmt::format("Log/Log_{:%Y%m%d%H%M}.txt", CurrentTime);
 
 			std::vector<spdlog::sink_ptr> Sinks;
 
@@ -34,6 +34,10 @@ namespace RT {
 
 		static void Shuwdown() {
 			
+		}
+
+		static std::string_view GetFileName() {
+			return LogFileName;
 		}
 
 		template<typename... Args>
@@ -57,12 +61,13 @@ namespace RT {
 		}
 
 	private:
-		inline static Ref<spdlog::logger> LoggerHandle;
+		inline static Ref<spdlog::logger> LoggerHandle = nullptr;
+		inline static std::string LogFileName;
 	};
 
 }
 
-#define LOG_INFO(...)		Logging::Info(__VA_ARGS__)
-#define LOG_WARN(...)		Logging::Info(__VA_ARGS__)
-#define LOG_ERROR(...)		Logging::Info(__VA_ARGS__)
-#define LOG_CRITICAL(...)	Logging::Info(__VA_ARGS__)
+#define LOG_INFO(Format, ...)		Logging::Info(fmt::runtime(Format), __VA_ARGS__)
+#define LOG_WARN(Format, ...)		Logging::Warning(fmt::runtime(Format), __VA_ARGS__)
+#define LOG_ERROR(Format, ...)		Logging::Error(fmt::runtime(Format), __VA_ARGS__)
+#define LOG_CRITICAL(Format, ...)	Logging::Critical(fmt::runtime(Format), __VA_ARGS__)

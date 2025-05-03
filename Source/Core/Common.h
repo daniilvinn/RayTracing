@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <memory>
+#include <string>
 
 namespace RT {
 
@@ -30,6 +31,18 @@ namespace RT {
 	#define IN_RELEASE_BUILD (1)
 #else
 	#define IN_RELEASE_BUILD (0)
+#endif
+
+#ifdef RT_DEBUG
+	#define IN_DEBUG_BUILD (1)
+#else 
+	#define IN_DEBUG_BUILD (0)
+#endif
+
+#if IN_RELEASE_BUILD
+#define NO_RELEASE_ONLY(Code)
+#else
+#define NO_RELEASE_ONLY(Code) Code
 #endif
 
 }

@@ -1,5 +1,10 @@
 #pragma once
 
+#include "Window.h"
+
+#include <functional>
+#include <stack>
+
 namespace RT {
 
 	class Application {
@@ -19,6 +24,21 @@ namespace RT {
 		*  @brief Shuts application down. Clears resources, writes log file
 		*/
 		void Shutdown();
+
+		void EnqueueObjectFinalize(std::function<void()> Exec);
+
+		void RequestEngineExit();
+
+	public:
+		static Application* const Instance;
+
+	private:
+
+		Ptr<Window> ApplicationWindow = nullptr;
+		bool Initialized = true;
+		bool Running = false;
+
+		std::stack<std::function<void()>> FinalizationQueue;
 
 	};
 

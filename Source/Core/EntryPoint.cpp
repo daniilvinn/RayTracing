@@ -14,10 +14,10 @@ int main()
 #endif
 {
 	
-	Application RTApplication;
+	Application* RTApplication = Application::Instance;
 
-	RTApplication.Init();
-	RTApplication.Run();
-	RTApplication.Shutdown();
+	RTApplication->Init();
+	RTApplication->Run();
+	RTApplication->Shutdown();
 
 }
