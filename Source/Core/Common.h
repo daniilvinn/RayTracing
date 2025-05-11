@@ -27,6 +27,8 @@ namespace RT {
 	template<typename T>
 	using Ref = std::shared_ptr<T>;
 
+#define BIT(x) (1 << x)
+
 #ifdef RT_RELEASE
 	#define IN_RELEASE_BUILD (1)
 #else

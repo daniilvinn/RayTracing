@@ -60,4 +60,9 @@ namespace RT {
 		}
 	}
 
+	enum class MemoryResidency : u32 {
+		DEVICE, // buffer is allocated in VRAM
+		HOST	// buffer is allocated in system RAM
+	};
+
 }

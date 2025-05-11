@@ -25,6 +25,10 @@ namespace RT {
 			return Config;
 		}
 
+		VkInstance GetInstance() const {
+			return VulkanInstance;
+		}
+
 		VkDevice GetDevice() const { 
 			return RenderDevice; 
 		}
@@ -32,6 +36,8 @@ namespace RT {
 		VkPhysicalDevice GetPhysicalDevice() const {
 			return PhysicalDevice;
 		}
+
+		u32 GetGraphicsQueueIndex() const { return QueueFamilyIndices.Graphics; }
 
 	public:
 		static RHI* const Instance;
